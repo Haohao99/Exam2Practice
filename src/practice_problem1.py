@@ -44,10 +44,10 @@ def main():
     # run_test_double()
     # run_test_shrink()
     # run_test_double_then_shrink()
-    run_test_reset()
-#     run_test_steal()
-#     run_test_get_history()
-#     run_test_combined_box()
+    # run_test_reset()
+    # run_test_steal()
+    # run_test_get_history()
+    run_test_combined_box()
 
 
 ########################################################################
@@ -102,14 +102,14 @@ class Box(object):
         #    DIFFICULTY:      3
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
-        self.in_contents = contents
-        self.in_volume = volume
         if len(contents) > volume:
             self.contents = ''
         else:
             self.contents = contents
         self.volume = volume
-
+        self.in_contents = self.contents
+        self.in_volume = self.volume
+        self.history = []
 
     def append_string(self, additional_contents):
         """
@@ -354,6 +354,7 @@ class Box(object):
         #    DIFFICULTY:      4
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
+        self.history.append(self.contents)
         self.contents = self.in_contents
         self.volume = self.in_volume
 
@@ -389,6 +390,8 @@ class Box(object):
         # FOR FULL CREDIT, YOUR SOLUTION MUST BE NO MORE THAN
         #    ** TWO **   LINES OF CODE.
         ################################################################
+        other_box.contents = self.append_string(other_box.contents)
+
 
     def get_history(self):
         """
@@ -428,6 +431,7 @@ class Box(object):
         #    DIFFICULTY:      6
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
+        return self.history
 
     def combined_box(self, other_box):
         """
@@ -454,6 +458,9 @@ class Box(object):
         #    DIFFICULTY:      4
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
+        contents = self.contents+other_box.contents
+        volume = self.volume + other_box.volume
+        return Box(contents,volume)
 
 
 ########################################################################
